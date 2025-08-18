@@ -7,4 +7,4 @@ Due to the data size limit, the file in the folder "wdata" has been compressed i
 
 # Author Contact Information
 
-Yung-Yu Tsai, ytsai@mail.missouri.edu
+Yung-Yu Tsai, ytsai@nccu.edu.tw
