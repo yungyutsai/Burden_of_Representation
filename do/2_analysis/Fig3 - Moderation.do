@@ -15,38 +15,6 @@ global cov1 = "age_sub age_sup eduyr_sub eduyr_sup los_sub los_sup fulltime_sub 
 global cov2 = "diversity_sub diversity_sup"
 global cov3 = "i.ageover40 i.tenure i.female i.military"
 
-use "$wdata/FEVS_FedScope_2023_Supervisor.dta", clear
-
-cap rm "$tab/Fig3.xls"
-cap rm "$tab/Fig3.txt"
-
-replace sat = (sat_job + sat_organization) / 2
-replace sr = (sr_confidence + sr_overall + sr_senior + sr_development + sr_listen + sr_respect) / 6
-replace rc = rc_expected
-
-foreach y in sat{
-	
-	reghdfe `y' c.prop_sub_samerace##c.prop_sup_samerace $cov1 $cov2 $cov3, a(agencyrace year) cl(agencyyear)
-	margins, dydx(prop_sub_samerace) at(prop_sup_samerace =(0(0.1)1)) post vsquish noestimcheck
-	outreg2 using "$tab/Fig3.xls", append dec(3)
-}
-
-foreach y in leave{
-	logit `y' c.prop_sub_samerace##c.prop_sup_samerace $cov1 $cov2 $cov3 i.agency_cd#i.race i.year, cl(agencyyear)
-	margins, dydx(prop_sub_samerace) at(prop_sup_samerace =(0(0.1)1)) post vsquish noestimcheck
-	outreg2 using "$tab/Fig3.xls", append dec(3)
-}
-
-foreach y in rc sr{
-	
-	reghdfe `y' c.prop_sub_samerace##c.prop_sup_samerace $cov1 $cov2 $cov3, a(agencyrace year) cl(agencyyear)
-	margins, dydx(prop_sub_samerace) at(prop_sup_samerace =(0(0.1)1)) post vsquish noestimcheck
-	outreg2 using "$tab/Fig3.xls", append dec(3)
-}
-
-
-
-
 clear
 set more off
  
@@ -58,11 +26,10 @@ gen x = (ceil(_n/2)-1)/10
 gen type = mod(_n,2)
 
 rename v2 estsat
-rename v3 estleave
-rename v4 estrc
-rename v5 estsr
+rename v3 estrc
+rename v4 estsr
 
-foreach x in sat leave rc sr{
+foreach x in sat rc sr {
 	replace est`x' = subinstr(est`x',"*","",.)
 	replace est`x' = subinstr(est`x',"(","",.)
 	replace est`x' = subinstr(est`x',")","",.)
@@ -76,7 +43,7 @@ rename est0 se
 gen upper = b + 1.96 * se
 gen lower = b - 1.96 * se
 
-foreach x in sat leave rc sr{
+foreach x in sat {
 	twoway 	(sc b x if model == "`x'", mc(navy)) ///
 			(rcap upper lower x if model == "`x'", lc(navy)), ///
 			scheme(s1color) legend(off) ///

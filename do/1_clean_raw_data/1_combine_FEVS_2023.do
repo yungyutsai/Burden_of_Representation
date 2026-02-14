@@ -128,6 +128,7 @@ gen diversity = 1 	- prop_white^2 ///
 					- prop_unspecified^2
 
 save "$wdata/FEVS_FedScope_2023.dta", replace
+
 use "$wdata/FEVS_FedScope_2023.dta", clear
 
 keep if super == 1 & minor != 99
@@ -163,11 +164,14 @@ foreach x in sat sr rc cr sc{
 	drop v1
 }
 
+/*
 egen totweight = sum(postwt), by(year)
 egen totn = count(postwt), by(year)
 gen weight = postwt/totweight * totn
 
 drop postwt totweight totn
+*/
+
 encode agency, gen(agency_cd)
 
 save "$wdata/FEVS_FedScope_2023_Supervisor.dta", replace
