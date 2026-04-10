@@ -1,4 +1,4 @@
-# The Relationship between Same-Race Subordinates and Federal Supervisors’ Job Satisfaction
+# Racially Divergent Patterns in the Relationship between Same-Race Subordinates and Federal Supervisors’ Job Satisfaction
 
 This repository contains datasets and codes for the paper titled "Racially Divergent Patterns in the Relationship between Same-Race Subordinates and Federal Supervisors’ Job Satisfaction." 
 
