@@ -2,7 +2,7 @@
 
 This repository contains datasets and code for the paper titled "Racially Divergent Patterns in the Relationship between Same-Race Subordinates and Federal Supervisors’ Job Satisfaction." 
 
-The paper is available at: https://journals.sagepub.com/doi/10.1177/00910260261444392[https://journals.sagepub.com/doi/10.1177/00910260261444392]
+The paper is available at: https://journals.sagepub.com/doi/10.1177/00910260261444392
 
 # Data Availability
 
